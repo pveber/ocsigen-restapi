@@ -30,4 +30,6 @@ Here is a very basic usage:
       | _ -> Restapi.error_content 404
 
 
-    let () = register_service [ "api" ] check_login serve
+    let () = Restapi.register_service [ "api" ] check_login serve
+
+Unfortunately, the server doesn't handle PUT and DELETE methods, which makes this extension a bit useless for now: the only advantage over Eliom right now is that you can handle error codes for the output and content_type in the request ...
