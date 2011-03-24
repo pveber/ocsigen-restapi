@@ -105,23 +105,3 @@ let () = register_extension ~fun_site ~name:"restapi" ()
 
 
 
-
-
-let check_login login passwd = login = passwd
-
-let serve = function 
-  | _,_,_,None -> error_content 401
-  | `GET params, path, _, Some user ->
-      Text_content.result_of_content ((String.concat " " path) ^ "\n" ^ user ^ "\n" ^ "Biquette served", "text/plain") 
-  | `POST (get_params, post_params),_,_,_ ->
-      Text_content.result_of_content (
-	"POST\n" ^ (String.concat " " (List.map snd get_params)) ^ "\n" ^ (String.concat " " (List.map snd post_params)),
-	"text/plain")
-  | `PUT (get_params, post_params),_,_,_ ->
-      Text_content.result_of_content (
-	"PUT\n" ^ (String.concat " " (List.map snd get_params)) ^ "\n" ^ (String.concat " " (List.map snd post_params)),
-	"text/plain")
-  | _ -> error_content 404
-
-
-let () = register_service [ "api" ] check_login serve
