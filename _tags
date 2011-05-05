@@ -1,0 +1,2 @@
+<*>: syntax_camlp4o, pkg_sqlexpr, pkg_sqlexpr.syntax, thread, pkg_atdgen
+<restapi.*>: pkg_lwt.syntax, pkg_ocsigen
